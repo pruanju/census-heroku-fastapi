@@ -6,3 +6,4 @@ requests
 fastapi==0.85.1
 uvicorn
 gunicorn
+xgboost==1.6.2
