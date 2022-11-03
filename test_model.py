@@ -34,7 +34,6 @@ def test_inference(model, encoder, lb, dataframe):
     X_test, y_test, _, _ = process_data(testdata, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb)    
     X_test, y_test, _, _ = get_test_data
  
-    #X_test = data_for_testing[0]
     y_preds = inference(model, X_test)
     
     assert isinstance(y_preds,np.ndarray), f'''The predictions returned by inference function is not a numpy array'''
@@ -44,9 +43,8 @@ def test_inference(model, encoder, lb, dataframe):
 def test_compute_model_metrics(model, encoder, lb, dataframe):
     traindata, testdata = train_test_split(dataframe, test_size=0.20)
     X_test, y_test, _, _ = process_data(testdata, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb)
- 
-    #X_test = data_for_testing[0]
-    #y_test = data_for_testing[1]
+
+    
     y_preds = inference(model, X_test)
     precision, recall, fbeta = compute_model_metrics(y_test, y_preds)
 
