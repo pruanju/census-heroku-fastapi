@@ -7,8 +7,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
 
-url = 'http://udacity-heroku-fastapi-app.herokuapp.com/'
-payload = {
+url = 'http://udacity-heroku-fastapi-app.herokuapp.com/predict'
+data = {
     'age': 25,
     'workclass': 'Private',
     'fnlgt': 200681,
@@ -25,16 +25,14 @@ payload = {
     'native-country': 'United-States',
     'salary': '<=50K'
 }
-# , 'accept': 'application/json'}
-headers = {'content-type': 'application/json'}
+
 
 if __name__ == '__main__':
-    # , headers=headers)
-    response = requests.post(url, data=json.dumps(payload), headers=headers)
+    response = requests.post(url, data=json.dumps(data))
 
     if response.status_code == 200:
         result = response.json()['result']
-        logging.info(f"The prediction for given sample is: {result}")
+        logging.info(f"The prediction for the provided data is: {result}")
     else:
         logging.error(
-            f'Something went wrong, response code is {response.status_code}')
+            f'Something went wrong, return code is {response.status_code}')
