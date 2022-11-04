@@ -31,30 +31,6 @@ def encoder(request):
     encoder = pickle.load(open('./model/Encoder_model.pickle', 'rb'))
     return encoder
 
-"""
-@pytest.fixture(scope='session')
-def data_for_testing(dataframe):
-    cat_features = [
-        "workclass",
-        "education",
-        "marital-status",
-        "occupation",
-        "relationship",
-        "race",
-        "sex",
-        "native-country",
-    ]
-    traindata, testdata = train_test_split(dataframe, test_size=0.20)
-    y = testdata['salary']
-    X = testdata.drop(['salary'], axis=1)
-    X_categorical = testdata[cat_features].values
-    X_continuous = X.drop(*[cat_features], axis=1)
-    X_cat = encoder.transform(testdata[cat_features].values)
-    y = lb.transform(y.values).ravel()
-    X = np.concatenate([X_continuous, X_cat], axis=1)
-
-    return ([X, y])
-"""
 
 @pytest.fixture(scope='session')
 def json_sample_1():
