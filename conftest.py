@@ -13,15 +13,9 @@ def dataframe(request):
     dataframe = pd.read_csv("./data/census.csv")
     return dataframe
 
-# Este metodo reemplaza a los 3 siguientes para que lo cargue todo en el arranque y no en la predicción!
-@app.on_event("startup")
-async def startup_event(): 
-    global model, encoder, lb
-    model = pickle.load(open("./model/Census_model.pickle", "rb"))
-    encoder = pickle.load(open("./model/Encoder_model.pickle", "rb"))
-    lb = pickle.load(open("./model/Label_model.pickle", "rb"))
+
     
-"""
+
 @pytest.fixture(scope='session')
 def model(request):
     model = pickle.load(open('./model/Census_model.pickle', 'rb'))
@@ -38,7 +32,7 @@ def lb(request):
 def encoder(request):
     encoder = pickle.load(open('./model/Encoder_model.pickle', 'rb'))
     return encoder
-"""
+
 
 @pytest.fixture(scope='session')
 def json_sample_1():

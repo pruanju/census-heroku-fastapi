@@ -10,10 +10,7 @@ import pickle
 from starter.ml.model import inference
 from starter.ml.data import process_data
 
-# load the model, encoder and label from disk
-model = pickle.load(open('./model/Census_model.pickle', 'rb'))
-encoder = pickle.load(open('./model/Encoder_model.pickle', 'rb'))
-lb = pickle.load(open('./model/Label_model.pickle', 'rb'))
+
 
 # Alias Generator function
 def replace_dash(string: str) -> str:
@@ -42,7 +39,23 @@ class CensusData(BaseModel):
 
 # Instance the app. 
 app = FastAPI() 
- 
+
+
+
+# Este metodo reemplaza a los 3 siguientes para que lo cargue todo en el arranque y no en la predicción!
+@app.on_event("startup")
+async def startup_event(): 
+    global model, encoder, lb
+    model = pickle.load(open("./model/Census_model.pickle", "rb"))
+    encoder = pickle.load(open("./model/Encoder_model.pickle", "rb"))
+    lb = pickle.load(open("./model/Label_model.pickle", "rb"))
+"""    
+# load the model, encoder and label from disk
+model = pickle.load(open('./model/Census_model.pickle', 'rb'))
+encoder = pickle.load(open('./model/Encoder_model.pickle', 'rb'))
+lb = pickle.load(open('./model/Label_model.pickle', 'rb'))    
+"""   
+    
 # Define a GET method. 
 @app.get("/") 
 async def say_hello(): 
