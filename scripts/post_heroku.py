@@ -31,7 +31,7 @@ if __name__ == '__main__':
     response = requests.post(url, data=json.dumps(data))
 
     if response.status_code == 200:
-        result = response.json()['result']
+        result = response.json()['Prediction']
         logging.info(f"The prediction for the provided data is: {result}")
     else:
         logging.error(
